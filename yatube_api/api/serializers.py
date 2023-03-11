@@ -6,6 +6,7 @@ from posts.models import Post, Comment, Group, Follow
 
 User = get_user_model()
 
+
 class PostSerializer(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(
         read_only=True,

@@ -6,13 +6,15 @@ from rest_framework.pagination import LimitOffsetPagination
 from posts.models import Post, Group, Follow
 from .permissions import AuthorOrReadOnly
 from .serializers import (PostSerializer,
-    CommentSerializer, GroupSerializer, FollowSerializer)
+                          CommentSerializer, 
+                          GroupSerializer, 
+                          FollowSerializer)
 
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = (AuthorOrReadOnly,) 
+    permission_classes = (AuthorOrReadOnly,)
     pagination_class = LimitOffsetPagination
 
     def perform_create(self, serializer):
@@ -34,9 +36,10 @@ class GroupViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = GroupSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
+
 class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
-    permission_classes = (AuthorOrReadOnly,) 
+    permission_classes = (AuthorOrReadOnly,)
 
     def get_queryset(self):
         need_post = self.kwargs.get('id')
@@ -57,7 +60,8 @@ class CommentViewSet(viewsets.ModelViewSet):
         if instance.author != self.request.user:
             raise PermissionDenied('Удаление чужого контента запрещено!')
         return super().perform_destroy(instance)
-    
+
+
 class FollowViewSet(viewsets.ModelViewSet):
     queryset = Follow.objects.all()
     serializer_class = FollowSerializer
