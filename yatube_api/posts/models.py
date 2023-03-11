@@ -46,14 +46,9 @@ class Comment(models.Model):
     )
 
 class Follow(models.Model):
-    """Система подписки"""
     user = models.ForeignKey(
-        User,
-        related_name='follower',
-        on_delete=models.CASCADE,
+        User, on_delete=models.CASCADE, related_name='follower'
     )
-    author = models.ForeignKey(
-        User,
-        related_name='following',
-        on_delete=models.CASCADE,
+    following = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='following'
     )
