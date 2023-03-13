@@ -18,7 +18,7 @@ router.register(r'^posts/(?P<id>\d+)/comments',
                 CommentViewSet,
                 basename='comment'
                 )
-router.register('follow', 
+router.register('follow',
                 FollowViewSet,
                 basename='follow')
 
